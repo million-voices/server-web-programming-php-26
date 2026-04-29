@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +15,14 @@
 </head>
 <body>
     <nav>
-        <a href="/">Home</a> | <a href="/about">About</a>
+        <a href="/">Home</a> |
+        <a href="/about">About</a> |
+<?php if (!isset($_SESSION["user_id"])) {
+    // User is not logged in
+    echo "<a href=\"/login\">Login</a> |";
+} else {
+    echo "<a href=\"/logout\">Logout</a> |";
+} ?>
+        <a href="/weather">Weather</a> |
     </nav>
     <main>
